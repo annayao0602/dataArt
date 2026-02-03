@@ -64,7 +64,7 @@ const CircosChart = function CircosChart(selector, main_data, options) {
         
         currentData.forEach((d, i) => {
             d.value = d.numpub;
-            d.uniqueId = d.Field;
+            d.uniqueId = d.Field + "_" + d.Domain;
         });
 
         const xDomain = currentData.map(d => d.uniqueId);
@@ -363,7 +363,7 @@ const CircosChart = function CircosChart(selector, main_data, options) {
             .attr("d", d => barArc({ innerRadius: cfg.innerRadius, outerRadius: cfg.innerRadius, startAngle: x(d.uniqueId), endAngle: x(d.uniqueId) }))
             .on("mouseover", function(d) {
                 tooltip.style("opacity", 1);
-                tooltip.html(`<strong>${d.uniqueId}</strong><br>Value: ${parseInt(d.value).toLocaleString()}`);
+                tooltip.html(`<strong>${d.Field}</strong><br>Value: ${parseInt(d.value).toLocaleString()}`);
                 d3.select(this).attr("fill-opacity", 1);
             })
             .on("mousemove", function(event) {
