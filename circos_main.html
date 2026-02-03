@@ -33,20 +33,6 @@
         flex-direction: row;
         height: 80vh;
     }
-    .buttons {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        margin-top: 150px;
-        gap: 20px;
-    }
-    .buttons:hover {
-        scale: 1.1;
-    }
-    .home_button:hover {
-        scale: 1.1;
-    }
 </style>
 
 <body>
@@ -56,7 +42,7 @@
             <div id = "line1">
                 <label for="dataset-select" style = 'font-family: Jura;'>Choose a university:</label>
                 <select id="dataset-select">
-                    <option value="/Users/annayao/Desktop/dataArt/uva_2025_full_hierarchy.csv">UVA</option>
+                    <option value="https://raw.githubusercontent.com/annayao0602/dataArt/main/uva_2025_full_hierarchy.csv">UVA</option>
                 </select>
             </div>
             <div class = "checkbox">
@@ -68,13 +54,6 @@
         </div>
     </div>
     <div class = "viz_container">
-        <div id = "viz_text">
-            <h1>Visualizing Publications</h1>
-            <p> Toggle axes lines and change universities from the controls in the top right corner. To go back to the tutorial, click the tutorial button again.
-            </p>
-            
-
-        </div>
         <div id = my_dataviz></div>
     </div>
 </div>

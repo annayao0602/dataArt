@@ -1,0 +1,194 @@
+
+
+*{
+    box-sizing: border-box;
+}
+html,body {
+    color: #525252;
+    line-height: 1.5;
+    background: rgb(255, 255, 255);
+    height: 100%;
+  }
+#controls {
+    font-family: 'Jura';
+    z-index: 10;
+    font-size: 14px;
+    border: 0.5px solid #e0e0e0;
+    padding: 0.5rem;
+    border-radius: 1px;
+    background-color: #fafafa;
+}
+.page-header h1 {
+    margin: 0;
+    font-family: 'Jura';
+    font-size: 24px;
+}
+.page-header {
+    font-family: 'Jura';
+    font-size: 18px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; 
+    align-items: center;
+}
+.header-title {
+    font-family: 'Jura';
+    font-size: 18px;
+    display: flex;
+    flex-direction: row;
+    align-items: center; 
+    gap: 15px; 
+}
+.dropdown {
+    position: relative;
+    display: inline-block;
+    z-index: 100;
+  }
+.dropdown:hover{
+    scale: 1.1;
+}
+.dropdown:hover .dropdown-content {
+    display: block;
+    cursor: pointer;
+  }
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #cfdde4;
+    min-width: 90px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    cursor: pointer;
+  }
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    font-size: 14px;
+    text-decoration: none;
+    display: block;
+    cursor: pointer;
+  }
+.dropdown-content a:hover {
+    background-color: #a3b2ba;
+    scale: 1.05;
+  }
+.about {
+    font-family: 'Jura';
+    font-size: 18px;
+    gap: 15px; 
+}
+/*---MAIN GRIDBOX---*/
+.dashboard-container {
+    display: grid;
+    height: 80vh;
+    grid-template-columns: 1fr 1.5fr;
+    grid-template-areas:
+                "chart-bar chart-radial"
+                "graph     chart-radial"
+                "graph     chart-radial"; 
+    grid-template-rows: auto auto;
+    gap: 20px;
+    max-width: 1500px; 
+    margin: auto auto; 
+} 
+.card {
+    background-color: #FFFFFF;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 4px 10px 0 rgba(0, 0, 0, 0.19);
+    padding: 10px;
+    min-height:0;
+    border-radius: 15px;
+}
+#box-helios { 
+    grid-area: graph; 
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    position: relative;
+}
+#box-circos {
+    grid-area: chart-radial; 
+    position: relative;
+}
+#button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+#button:hover {
+    scale: 1.1; 
+}
+#box-bar { 
+    grid-area: chart-bar; 
+    position: relative;
+}
+#box-bar h3 {
+    margin: 0;
+    font-family: 'Jura';
+}
+#my_dataviz {
+    display: flex;
+    justify-content: center; 
+    align-items: center;    
+    height: 100%; 
+}
+.viz_header{
+    position: absolute;
+    top: 0px;
+    left: 20px;
+    font-family: 'Jura';
+}
+
+
+/* ---- CIRCOS CSS ----*/
+.group-label {
+    font-size: 9px;
+    font-family: 'Jura';
+    font-weight: 300;
+    pointer-events: none;
+}
+.axis-label {
+    font-size: 9px;
+    font-family: 'Jura';
+    font-weight: 300;
+}
+.tooltip {
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    font-family: 'Jura';
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-size: 12px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s ease-out;
+}
+.grid-circle {
+    fill: none;
+    stroke: #7e7e7e;
+    stroke-dasharray: 2,2;
+    stroke-width: 0.3px;
+}
+.axis-hidden {
+    display: none;
+}
+
+.center-circle {
+    fill: #ffffff;
+    stroke: #ccc;
+    stroke-width: 1px;
+    cursor: pointer; 
+}
+.center-circle:hover {
+    fill: #e0e0e0;
+}
+.ideogram-path:hover {
+    cursor: pointer; 
+}
+.highlighted-stroke {
+    stroke: black !important; 
+    stroke-width: 0.5px !important; 
+}
+
+
+  
