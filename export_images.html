@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>UVA Circos Exporter</title>
+    <link href='https://fonts.googleapis.com/css?family=Jura' rel='stylesheet'>
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <script src="circos_simple.js"></script>
+
+    <style>
+        body { font-family: 'Jura', sans-serif; background: #f4f4f4; padding: 20px; }
+        h1 { text-align: center; color: #333; margin-bottom: 10px; }
+        
+        /* Style for the main container */
+        .header-controls {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        /* Big Download All Button */
+        .btn-download-all {
+            padding: 15px 30px;
+            background: #bc5090; /* Distinct color */
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 8px;
+            font-family: 'Jura';
+            font-size: 18px;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            transition: transform 0.2s, background 0.2s;
+        }
+        .btn-download-all:hover {
+            background: #d45087;
+            transform: scale(1.05);
+        }
+        .btn-download-all:active {
+            transform: scale(0.95);
+        }
+
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+        }
+        .card {
+            padding: 15px;
+            text-align: center;
+            width: 600px; 
+        }
+        .viz-container {
+            width: 500px;
+            height: 500px;
+            margin: 0 auto;
+        }
+        /* Individual Card Buttons */
+        .btn-card {
+            margin-top: 15px;
+            padding: 10px 20px;
+            background: #003f5c;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-family: 'Jura';
+            font-size: 14px;
+            transition: background 0.3s;
+        }
+        .btn-card:hover { background: #006391; }
+    </style>
+</head>
+<body>
+
+<div class="header-controls">
+    <h1>UVA Research Visualization (2010-2025)</h1>
+    <p>Please allow your browser to download multiple files if prompted.</p>
+    <button class="btn-download-all" onclick="downloadAll()">Download All (2010-2025)</button>
+</div>
+
+<div id="gallery" class="gallery"></div>
+
+<script>
+    const startYear = 2010;
+    const endYear = 2025;
+    const gallery = d3.select("#gallery");
+
+    for (let year = startYear; year <= endYear; year++) {
+        
+        const card = gallery.append("div").attr("class", "card");
+        card.append("h3").text("UVA Research " + year);
+        
+        const divId = "viz-" + year;
+        card.append("div").attr("id", divId).attr("class", "viz-container");
+
+        d3.csv(`timeline_data/uva_data_${year}.csv`, function(error, data) {
+            if (error) {
+                console.warn(`Data missing for ${year}`);
+                d3.select("#" + divId).text("No Data Available");
+                return;
+            }
+
+            const chart = CircosChart("#" + divId, data, {
+                width: 500, 
+                height: 500,
+                margin: {top: 25, right: 25, bottom: 25, left: 25},
+                innerRadius: 40,  
+                outerRadius: 300, 
+                maxValue: 500
+            });
+
+            // Add class 'btn-card' to identify these easily later
+            card.append("button")
+                .attr("class", "btn-card") 
+                .text(`Download ${year} PNG`)
+                .on("click", function() {
+                    downloadSVGAsPNG(divId, `uva_research_${year}.png`);
+                });
+        });
+    }
+
+    // --- Image Conversion Logic ---
+    function downloadSVGAsPNG(selector, filename) {
+        const svgElement = document.querySelector(`#${selector} svg`);
+        if (!svgElement) return;
+
+        const serializer = new XMLSerializer();
+        const svgString = serializer.serializeToString(svgElement);
+        
+        const canvas = document.createElement("canvas");
+        const width = 1000; 
+        const height = 1000;
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext("2d");
+
+        const img = new Image();
+        img.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgString)));
+
+        img.onload = function() {
+            ctx.fillStyle = "white";
+            ctx.fillRect(0, 0, width, height);
+            ctx.drawImage(img, 0, 0, width, height);
+            
+            const link = document.createElement('a');
+            link.download = filename;
+            link.href = canvas.toDataURL("image/png");
+            link.click();
+        };
+    }
+
+    // --- DOWNLOAD ALL LOGIC ---
+    function downloadAll() {
+        // 1. Select all the individual buttons we created
+        const allButtons = document.querySelectorAll('.btn-card');
+        
+        if (allButtons.length === 0) {
+            alert("Charts are still loading... please wait a moment.");
+            return;
+        }
+
+        // 2. Loop through and click them with a delay
+        // We use a 1.5 second delay to prevent the browser from blocking "automatic downloads"
+        allButtons.forEach((btn, index) => {
+            setTimeout(() => {
+                // Simulate a click on the existing button
+                btn.click();
+            }, index * 1500); 
+        });
+    }
+</script>
+
+</body>
+</html>

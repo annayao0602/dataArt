@@ -8,7 +8,7 @@ const container = d3.select("#my_dataviz"); // Ensure this ID exists in your HTM
 // Clear previous content and set up Grid Style
 container.html(""); 
 container.style("display", "grid")
-         .style("grid-template-columns", "repeat(auto-fit, minmax(300px, 1fr))")
+         .style("grid-template-columns", "repeat(4, minmax(300px, 1fr))")
          .style("gap", "20px")
          .style("padding", "20px");
 
@@ -19,8 +19,6 @@ years.forEach(year => {
     // 1. Create a wrapper for each chart
     const wrapper = container.append("div")
         .style("text-align", "center")
-        .style("border", "1px solid #eee")
-        .style("border-radius", "8px")
         .style("background", "#fff");
 
     // Add Year Label
@@ -34,7 +32,7 @@ years.forEach(year => {
     wrapper.append("div").attr("id", chartId);
 
     // 2. Load Data and Render
-    d3.csv(`/Users/annayao/dataArt/timeline_data/uva_data_${year}.csv`, function(error, data) {
+    d3.csv(`timeline_data/uva_data_${year}.csv`, function(error, data) {
         if (error) {
             console.log(`No data for ${year}`);
             return;
@@ -44,10 +42,10 @@ years.forEach(year => {
         CircosChart("#" + chartId, data, {
             width: 300,
             height: 300,
-            innerRadius: 40,
+            innerRadius: 30,
             outerRadius: 130,
             margin: { top: 10, right: 10, bottom: 10, left: 10 },
-            maxValue: 1500
+            maxValue: 500
         });
     });
 });

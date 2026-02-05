@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>R1 Research Visualization</title>
+    <link href='https://fonts.googleapis.com/css?family=Jura' rel='stylesheet'>
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <script src="circos_simple.js"></script>
+
+    <style>
+        body { font-family: 'Jura', sans-serif; background: #f4f4f4; padding: 20px; }
+        h1 { text-align: center; color: #333; margin-bottom: 10px; }
+        
+        /* Style for the main container */
+        .header-controls {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        /* Big Download All Button */
+        .btn-download-all {
+            padding: 15px 30px;
+            background: #bc5090; 
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 8px;
+            font-family: 'Jura';
+            font-size: 18px;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            transition: transform 0.2s, background 0.2s;
+        }
+        .btn-download-all:hover {
+            background: #d45087;
+            transform: scale(1.05);
+        }
+        .btn-download-all:active {
+            transform: scale(0.95);
+        }
+
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+        }
+        .card {
+            padding: 15px;
+            text-align: center;
+            width: 600px; 
+        }
+        .viz-container {
+            width: 600px;
+            height: 600px;
+            margin: 0 auto;
+        }
+        /* Individual Card Buttons */
+        .btn-card {
+            margin-top: 15px;
+            padding: 10px 20px;
+            background: #003f5c;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-family: 'Jura';
+            font-size: 14px;
+            transition: background 0.3s;
+        }
+        .btn-card:hover { background: #006391; }
+    </style>
+</head>
+<body>
+
+<div class="header-controls">
+    <h1>R1 Universities Research Visualization (Last 10 Years)</h1>
+    <p>Please allow your browser to download multiple files if prompted.</p>
+    <button class="btn-download-all" onclick="downloadAll()">Download All Universities</button>
+</div>
+
+<div id="gallery" class="gallery"></div>
+
+<script>
+    const gallery = d3.select("#gallery");
+
+    // 1. Define the list of filenames (without .csv extension)
+    // These must match the files you generated in Python
+    const universities = [
+        "Yale", 
+        "UVA",
+        "Stanford", 
+        "Cornell", 
+        "Dartmouth", 
+        "UPenn", 
+        "Johns_Hopkins", 
+        "Carnegie_Mellon", 
+        "NYU", 
+        "UCLA",
+        "Virginia_tech",
+        "UWashington",
+        "UW_Madison",
+        "Purdue",
+        "Penn_State"
+    ];
+
+    // 2. Loop through the array instead of years
+    universities.forEach(function(uniName) {
+        
+        // Create Card
+        const card = gallery.append("div").attr("class", "card");
+        // Format label: Replace underscores with spaces for display
+        const displayName = uniName.replace(/_/g, ' '); 
+        card.append("h3").text(displayName);
+        
+        const divId = "viz-" + uniName;
+        card.append("div").attr("id", divId).attr("class", "viz-container");
+
+        // Load Data
+        d3.csv(`r1_data/${uniName}.csv`, function(error, data) {
+            if (error) {
+                console.warn(`Data missing for ${uniName}`);
+                d3.select("#" + divId)
+                  .style("display", "flex")
+                  .style("align-items", "center")
+                  .style("justify-content", "center")
+                  .text("No Data Available");
+                return;
+            }
+
+            // Render Chart
+            const chart = CircosChart("#" + divId, data, {
+                width: 500, 
+                height: 500,
+                margin: {top: 25, right: 25, bottom: 25, left: 25},
+                innerRadius: 50,  
+                outerRadius: 300, 
+                maxValue: 10000 
+            });
+
+            // Add Download Button
+            card.append("button")
+                .attr("class", "btn-card") 
+                .text(`Download ${displayName} PNG`)
+                .on("click", function() {
+                    downloadSVGAsPNG(divId, `${uniName}_research.png`);
+                });
+        });
+    });
+
+    // --- Image Conversion Logic ---
+    function downloadSVGAsPNG(selector, filename) {
+        const svgElement = document.querySelector(`#${selector} svg`);
+        if (!svgElement) return;
+
+        const serializer = new XMLSerializer();
+        const svgString = serializer.serializeToString(svgElement);
+        
+        const canvas = document.createElement("canvas");
+        const width = 1000; 
+        const height = 1000;
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext("2d");
+
+        const img = new Image();
+        // Convert SVG string to Base64
+        img.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgString)));
+
+        img.onload = function() {
+            ctx.fillStyle = "white";
+            ctx.fillRect(0, 0, width, height);
+            ctx.drawImage(img, 0, 0, width, height);
+            
+            const link = document.createElement('a');
+            link.download = filename;
+            link.href = canvas.toDataURL("image/png");
+            link.click();
+        };
+    }
+
+    // --- DOWNLOAD ALL LOGIC ---
+    function downloadAll() {
+        const allButtons = document.querySelectorAll('.btn-card');
+        
+        if (allButtons.length === 0) {
+            alert("Charts are still loading... please wait a moment.");
+            return;
+        }
+
+        // Loop through and click them with a delay to prevent browser blocking
+        allButtons.forEach((btn, index) => {
+            setTimeout(() => {
+                btn.click();
+            }, index * 1500); 
+        });
+    }
+</script>
+
+</body>
+</html>
