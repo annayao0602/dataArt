@@ -1,0 +1,217 @@
+Domain,Group,Field,numpub
+Health Sciences,Dentistry,Periodontics,1
+Health Sciences,Health Professions,Emergency Medical Services,8
+Health Sciences,Health Professions,General Health Professions,68
+Health Sciences,Health Professions,Health Information Management,10
+Health Sciences,Health Professions,Medical Laboratory Technology,2
+Health Sciences,Health Professions,Occupational Therapy,4
+Health Sciences,Health Professions,Pharmacy,8
+Health Sciences,Health Professions,"Physical Therapy, Sports Therapy and Rehabilitation",9
+Health Sciences,Health Professions,Radiological and Ultrasound Technology,5
+Health Sciences,Health Professions,Speech and Hearing,8
+Health Sciences,Medicine,Anesthesiology and Pain Medicine,2
+Health Sciences,Medicine,Biochemistry,1
+Health Sciences,Medicine,Cardiology and Cardiovascular Medicine,129
+Health Sciences,Medicine,Complementary and alternative medicine,6
+Health Sciences,Medicine,Critical Care and Intensive Care Medicine,13
+Health Sciences,Medicine,Dermatology,15
+Health Sciences,Medicine,Emergency Medicine,27
+Health Sciences,Medicine,"Endocrinology, Diabetes and Metabolism",57
+Health Sciences,Medicine,Epidemiology,112
+Health Sciences,Medicine,Family Practice,6
+Health Sciences,Medicine,Gastroenterology,6
+Health Sciences,Medicine,Genetics,22
+Health Sciences,Medicine,Geriatrics and Gerontology,5
+Health Sciences,Medicine,Hematology,18
+Health Sciences,Medicine,Hepatology,17
+Health Sciences,Medicine,Immunology and Allergy,13
+Health Sciences,Medicine,Infectious Diseases,61
+Health Sciences,Medicine,Internal Medicine,10
+Health Sciences,Medicine,Microbiology,1
+Health Sciences,Medicine,Nephrology,22
+Health Sciences,Medicine,Neurology,73
+Health Sciences,Medicine,Obstetrics and Gynecology,16
+Health Sciences,Medicine,Oncology,78
+Health Sciences,Medicine,Ophthalmology,15
+Health Sciences,Medicine,Orthopedics and Sports Medicine,36
+Health Sciences,Medicine,Otorhinolaryngology,6
+Health Sciences,Medicine,Pathology and Forensic Medicine,56
+Health Sciences,Medicine,"Pediatrics, Perinatology and Child Health",28
+Health Sciences,Medicine,Pharmacology,9
+Health Sciences,Medicine,Physiology,71
+Health Sciences,Medicine,Psychiatry and Mental health,39
+Health Sciences,Medicine,"Public Health, Environmental and Occupational Health",76
+Health Sciences,Medicine,Pulmonary and Respiratory Medicine,126
+Health Sciences,Medicine,"Radiology, Nuclear Medicine and Imaging",83
+Health Sciences,Medicine,Rehabilitation,5
+Health Sciences,Medicine,Reproductive Medicine,37
+Health Sciences,Medicine,Rheumatology,17
+Health Sciences,Medicine,Surgery,213
+Health Sciences,Medicine,Transplantation,6
+Health Sciences,Medicine,Urology,5
+Health Sciences,Nursing,Nutrition and Dietetics,32
+Health Sciences,Nursing,Research and Theory,2
+Health Sciences,Veterinary,Small Animals,2
+Life Sciences,Agricultural and Biological Sciences,Animal Science and Zoology,1
+Life Sciences,Agricultural and Biological Sciences,"Ecology, Evolution, Behavior and Systematics",20
+Life Sciences,Agricultural and Biological Sciences,Food Science,3
+Life Sciences,Agricultural and Biological Sciences,Forestry,1
+Life Sciences,Agricultural and Biological Sciences,General Agricultural and Biological Sciences,6
+Life Sciences,Agricultural and Biological Sciences,Insect Science,5
+Life Sciences,Agricultural and Biological Sciences,Plant Science,28
+Life Sciences,Agricultural and Biological Sciences,Soil Science,4
+Life Sciences,"Biochemistry, Genetics and Molecular Biology",Aging,1
+Life Sciences,"Biochemistry, Genetics and Molecular Biology",Biochemistry,3
+Life Sciences,"Biochemistry, Genetics and Molecular Biology",Biophysics,10
+Life Sciences,"Biochemistry, Genetics and Molecular Biology",Biotechnology,5
+Life Sciences,"Biochemistry, Genetics and Molecular Biology",Cancer Research,29
+Life Sciences,"Biochemistry, Genetics and Molecular Biology",Cell Biology,31
+Life Sciences,"Biochemistry, Genetics and Molecular Biology",Clinical Biochemistry,4
+Life Sciences,"Biochemistry, Genetics and Molecular Biology",Developmental Biology,1
+Life Sciences,"Biochemistry, Genetics and Molecular Biology",Endocrinology,15
+Life Sciences,"Biochemistry, Genetics and Molecular Biology",Genetics,73
+Life Sciences,"Biochemistry, Genetics and Molecular Biology",Molecular Biology,279
+Life Sciences,"Biochemistry, Genetics and Molecular Biology",Molecular Medicine,10
+Life Sciences,"Biochemistry, Genetics and Molecular Biology",Physiology,5
+Life Sciences,"Biochemistry, Genetics and Molecular Biology",Structural Biology,2
+Life Sciences,Immunology and Microbiology,Applied Microbiology and Biotechnology,2
+Life Sciences,Immunology and Microbiology,Immunology,104
+Life Sciences,Immunology and Microbiology,Microbiology,14
+Life Sciences,Immunology and Microbiology,Parasitology,14
+Life Sciences,Immunology and Microbiology,Virology,10
+Life Sciences,Neuroscience,Behavioral Neuroscience,2
+Life Sciences,Neuroscience,Biological Psychiatry,2
+Life Sciences,Neuroscience,Cellular and Molecular Neuroscience,32
+Life Sciences,Neuroscience,Cognitive Neuroscience,54
+Life Sciences,Neuroscience,Developmental Neuroscience,9
+Life Sciences,Neuroscience,Endocrine and Autonomic Systems,15
+Life Sciences,Neuroscience,Neurology,16
+Life Sciences,Neuroscience,Sensory Systems,1
+Life Sciences,"Pharmacology, Toxicology and Pharmaceutics",Pharmaceutical Science,1
+Life Sciences,"Pharmacology, Toxicology and Pharmaceutics",Pharmacology,6
+Physical Sciences,Chemical Engineering,Bioengineering,2
+Physical Sciences,Chemical Engineering,Catalysis,4
+Physical Sciences,Chemical Engineering,Fluid Flow and Transfer Processes,2
+Physical Sciences,Chemistry,Analytical Chemistry,2
+Physical Sciences,Chemistry,Electrochemistry,2
+Physical Sciences,Chemistry,Inorganic Chemistry,4
+Physical Sciences,Chemistry,Organic Chemistry,22
+Physical Sciences,Chemistry,Physical and Theoretical Chemistry,5
+Physical Sciences,Chemistry,Spectroscopy,26
+Physical Sciences,Computer Science,Artificial Intelligence,60
+Physical Sciences,Computer Science,Computational Theory and Mathematics,10
+Physical Sciences,Computer Science,Computer Networks and Communications,39
+Physical Sciences,Computer Science,Computer Science Applications,13
+Physical Sciences,Computer Science,Computer Vision and Pattern Recognition,37
+Physical Sciences,Computer Science,Hardware and Architecture,24
+Physical Sciences,Computer Science,Human-Computer Interaction,3
+Physical Sciences,Computer Science,Information Systems,41
+Physical Sciences,Computer Science,Signal Processing,17
+Physical Sciences,Computer Science,Software,4
+Physical Sciences,Earth and Planetary Sciences,Atmospheric Science,28
+Physical Sciences,Earth and Planetary Sciences,Earth-Surface Processes,1
+Physical Sciences,Earth and Planetary Sciences,Geochemistry and Petrology,2
+Physical Sciences,Earth and Planetary Sciences,Geology,2
+Physical Sciences,Earth and Planetary Sciences,Geophysics,2
+Physical Sciences,Earth and Planetary Sciences,Oceanography,20
+Physical Sciences,Earth and Planetary Sciences,Paleontology,4
+Physical Sciences,Energy,Fuel Technology,1
+Physical Sciences,Energy,"Renewable Energy, Sustainability and the Environment",9
+Physical Sciences,Engineering,Aerospace Engineering,36
+Physical Sciences,Engineering,Architecture,9
+Physical Sciences,Engineering,Automotive Engineering,21
+Physical Sciences,Engineering,Biomedical Engineering,116
+Physical Sciences,Engineering,Building and Construction,17
+Physical Sciences,Engineering,Civil and Structural Engineering,29
+Physical Sciences,Engineering,Computational Mechanics,32
+Physical Sciences,Engineering,Control and Systems Engineering,39
+Physical Sciences,Engineering,Electrical and Electronic Engineering,101
+Physical Sciences,Engineering,Mechanical Engineering,36
+Physical Sciences,Engineering,Mechanics of Materials,22
+Physical Sciences,Engineering,Media Technology,14
+Physical Sciences,Engineering,Ocean Engineering,12
+Physical Sciences,Engineering,"Safety, Risk, Reliability and Quality",9
+Physical Sciences,Environmental Science,Ecological Modeling,2
+Physical Sciences,Environmental Science,Ecology,24
+Physical Sciences,Environmental Science,Environmental Chemistry,3
+Physical Sciences,Environmental Science,Environmental Engineering,14
+Physical Sciences,Environmental Science,Global and Planetary Change,40
+Physical Sciences,Environmental Science,"Health, Toxicology and Mutagenesis",9
+Physical Sciences,Environmental Science,Industrial and Manufacturing Engineering,9
+Physical Sciences,Environmental Science,"Management, Monitoring, Policy and Law",11
+Physical Sciences,Environmental Science,Nature and Landscape Conservation,14
+Physical Sciences,Environmental Science,Pollution,3
+Physical Sciences,Environmental Science,Water Science and Technology,12
+Physical Sciences,Materials Science,Biomaterials,26
+Physical Sciences,Materials Science,Ceramics and Composites,8
+Physical Sciences,Materials Science,"Electronic, Optical and Magnetic Materials",22
+Physical Sciences,Materials Science,General Materials Science,2
+Physical Sciences,Materials Science,Materials Chemistry,106
+Physical Sciences,Materials Science,Metals and Alloys,10
+Physical Sciences,Materials Science,Polymers and Plastics,2
+Physical Sciences,Materials Science,"Surfaces, Coatings and Films",4
+Physical Sciences,Mathematics,Algebra and Number Theory,9
+Physical Sciences,Mathematics,Applied Mathematics,11
+Physical Sciences,Mathematics,Discrete Mathematics and Combinatorics,4
+Physical Sciences,Mathematics,Geometry and Topology,32
+Physical Sciences,Mathematics,Mathematical Physics,13
+Physical Sciences,Mathematics,Statistics and Probability,24
+Physical Sciences,Mathematics,Theoretical Computer Science,3
+Physical Sciences,Physics and Astronomy,Astronomy and Astrophysics,204
+Physical Sciences,Physics and Astronomy,"Atomic and Molecular Physics, and Optics",73
+Physical Sciences,Physics and Astronomy,Condensed Matter Physics,11
+Physical Sciences,Physics and Astronomy,Instrumentation,3
+Physical Sciences,Physics and Astronomy,Nuclear and High Energy Physics,48
+Physical Sciences,Physics and Astronomy,Radiation,21
+Physical Sciences,Physics and Astronomy,Statistical and Nonlinear Physics,8
+Social Sciences,Arts and Humanities,Archeology,10
+Social Sciences,Arts and Humanities,Classics,4
+Social Sciences,Arts and Humanities,Conservation,4
+Social Sciences,Arts and Humanities,History,28
+Social Sciences,Arts and Humanities,History and Philosophy of Science,17
+Social Sciences,Arts and Humanities,Language and Linguistics,10
+Social Sciences,Arts and Humanities,Literature and Literary Theory,24
+Social Sciences,Arts and Humanities,Museology,2
+Social Sciences,Arts and Humanities,Music,10
+Social Sciences,Arts and Humanities,Philosophy,32
+Social Sciences,Arts and Humanities,Religious studies,7
+Social Sciences,Arts and Humanities,Visual Arts and Performing Arts,14
+Social Sciences,"Business, Management and Accounting",Accounting,30
+Social Sciences,"Business, Management and Accounting",Management Information Systems,6
+Social Sciences,"Business, Management and Accounting",Management of Technology and Innovation,8
+Social Sciences,"Business, Management and Accounting",Marketing,15
+Social Sciences,"Business, Management and Accounting",Organizational Behavior and Human Resource Management,13
+Social Sciences,"Business, Management and Accounting",Strategy and Management,27
+Social Sciences,"Business, Management and Accounting","Tourism, Leisure and Hospitality Management",1
+Social Sciences,Decision Sciences,General Decision Sciences,9
+Social Sciences,Decision Sciences,Information Systems and Management,20
+Social Sciences,Decision Sciences,Management Science and Operations Research,32
+Social Sciences,Decision Sciences,"Statistics, Probability and Uncertainty",19
+Social Sciences,"Economics, Econometrics and Finance",Economics and Econometrics,100
+Social Sciences,"Economics, Econometrics and Finance",Finance,28
+Social Sciences,"Economics, Econometrics and Finance","General Economics, Econometrics and Finance",13
+Social Sciences,Psychology,Applied Psychology,11
+Social Sciences,Psychology,Clinical Psychology,67
+Social Sciences,Psychology,Developmental and Educational Psychology,53
+Social Sciences,Psychology,Experimental and Cognitive Psychology,47
+Social Sciences,Psychology,General Psychology,2
+Social Sciences,Psychology,Neuropsychology and Physiological Psychology,3
+Social Sciences,Psychology,Social Psychology,82
+Social Sciences,Social Sciences,Anthropology,27
+Social Sciences,Social Sciences,Communication,10
+Social Sciences,Social Sciences,Cultural Studies,12
+Social Sciences,Social Sciences,Demography,20
+Social Sciences,Social Sciences,Development,5
+Social Sciences,Social Sciences,Education,166
+Social Sciences,Social Sciences,Gender Studies,25
+Social Sciences,Social Sciences,General Social Sciences,1
+Social Sciences,Social Sciences,"Geography, Planning and Development",4
+Social Sciences,Social Sciences,Health,26
+Social Sciences,Social Sciences,Law,28
+Social Sciences,Social Sciences,Linguistics and Language,7
+Social Sciences,Social Sciences,Political Science and International Relations,132
+Social Sciences,Social Sciences,Public Administration,2
+Social Sciences,Social Sciences,Safety Research,19
+Social Sciences,Social Sciences,Sociology and Political Science,177
+Social Sciences,Social Sciences,Transportation,4
+Social Sciences,Social Sciences,Urban Studies,2
