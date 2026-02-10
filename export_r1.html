@@ -83,24 +83,27 @@
 <script>
     const gallery = d3.select("#gallery");
 
-    // 1. Define the list of filenames (without .csv extension)
-    // These must match the files you generated in Python
     const universities = [
-        "Yale", 
-        "UVA",
-        "Stanford", 
-        "Cornell", 
-        "Dartmouth", 
-        "UPenn", 
-        "Johns_Hopkins", 
-        "Carnegie_Mellon", 
-        "NYU", 
+        "U_Michigan",
+        "Harvard",
+        "Yale",
+        "Stanford",
+        "Cornell",
+        "Georgetown",
+        "Princeton",
+        "Johns_Hopkins",
+        "Carnegie_Mellon",
+        "NYU",
         "UCLA",
-        "Virginia_tech",
         "UWashington",
         "UW_Madison",
-        "Purdue",
-        "Penn_State"
+        "U_Utah",
+        "Penn_State",
+        "UVA",
+        "UMD",
+        "V_Tech",
+        "Vanderbilt",
+        "U_Florida"
     ];
 
     // 2. Loop through the array instead of years
@@ -134,7 +137,7 @@
                 margin: {top: 25, right: 25, bottom: 25, left: 25},
                 innerRadius: 50,  
                 outerRadius: 300, 
-                maxValue: 10000 
+                maxValue: 12000 
             });
 
             // Add Download Button
@@ -154,10 +157,12 @@
 
         const serializer = new XMLSerializer();
         const svgString = serializer.serializeToString(svgElement);
+
+        const scaleFactor = 4; 
+        const width = 500 * scaleFactor;
+        const height = 500 * scaleFactor;
         
         const canvas = document.createElement("canvas");
-        const width = 1000; 
-        const height = 1000;
         canvas.width = width;
         canvas.height = height;
         const ctx = canvas.getContext("2d");
@@ -167,8 +172,6 @@
         img.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgString)));
 
         img.onload = function() {
-            ctx.fillStyle = "white";
-            ctx.fillRect(0, 0, width, height);
             ctx.drawImage(img, 0, 0, width, height);
             
             const link = document.createElement('a');
