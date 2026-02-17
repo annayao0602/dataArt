@@ -1,0 +1,240 @@
+field,domain,numpub
+Accounting,Social Sciences,30
+Aerospace Engineering,Physical Sciences,23
+Aging,Life Sciences,11
+Agronomy and Crop Science,Life Sciences,1
+Algebra and Number Theory,Physical Sciences,11
+Analytical Chemistry,Physical Sciences,0
+Anatomy,Health Sciences,4
+Anesthesiology and Pain Medicine,Health Sciences,11
+Animal Science and Zoology,Life Sciences,2
+Anthropology,Social Sciences,10
+Applied Mathematics,Physical Sciences,8
+Applied Microbiology and Biotechnology,Life Sciences,3
+Applied Psychology,Social Sciences,23
+Aquatic Science,Life Sciences,0
+Archeology,Social Sciences,3
+Architecture,Physical Sciences,5
+Artificial Intelligence,Physical Sciences,164
+Astronomy and Astrophysics,Physical Sciences,116
+Atmospheric Science,Physical Sciences,27
+"Atomic and Molecular Physics, and Optics",Physical Sciences,32
+Automotive Engineering,Physical Sciences,12
+Behavioral Neuroscience,Life Sciences,4
+Biochemistry,Health Sciences,1
+Bioengineering,Physical Sciences,1
+Biological Psychiatry,Life Sciences,2
+Biomaterials,Physical Sciences,22
+Biomedical Engineering,Physical Sciences,103
+Biophysics,Life Sciences,10
+Biotechnology,Life Sciences,2
+Building and Construction,Physical Sciences,11
+Business and International Management,Social Sciences,3
+Cancer Research,Life Sciences,39
+Cardiology and Cardiovascular Medicine,Health Sciences,161
+Catalysis,Physical Sciences,4
+Cell Biology,Life Sciences,46
+Cellular and Molecular Neuroscience,Life Sciences,29
+Ceramics and Composites,Physical Sciences,7
+Chemical Health and Safety,Physical Sciences,1
+Civil and Structural Engineering,Physical Sciences,27
+Classics,Social Sciences,3
+Clinical Biochemistry,Life Sciences,6
+Clinical Psychology,Social Sciences,75
+Cognitive Neuroscience,Life Sciences,75
+Communication,Social Sciences,11
+Complementary and Manual Therapy,Health Sciences,1
+Complementary and alternative medicine,Health Sciences,11
+Computational Mathematics,Physical Sciences,1
+Computational Mechanics,Physical Sciences,16
+Computational Theory and Mathematics,Physical Sciences,26
+Computer Graphics and Computer-Aided Design,Physical Sciences,2
+Computer Networks and Communications,Physical Sciences,36
+Computer Science Applications,Physical Sciences,18
+Computer Vision and Pattern Recognition,Physical Sciences,38
+Condensed Matter Physics,Physical Sciences,10
+Conservation,Social Sciences,2
+Control and Systems Engineering,Physical Sciences,26
+Critical Care and Intensive Care Medicine,Health Sciences,12
+Cultural Studies,Social Sciences,5
+Demography,Social Sciences,16
+Dermatology,Health Sciences,12
+Development,Social Sciences,4
+Developmental Biology,Life Sciences,3
+Developmental Neuroscience,Life Sciences,4
+Developmental and Educational Psychology,Social Sciences,36
+Discrete Mathematics and Combinatorics,Physical Sciences,8
+Earth-Surface Processes,Physical Sciences,6
+Ecological Modeling,Physical Sciences,2
+Ecology,Physical Sciences,26
+"Ecology, Evolution, Behavior and Systematics",Life Sciences,17
+Economics and Econometrics,Social Sciences,96
+Education,Social Sciences,111
+Electrical and Electronic Engineering,Physical Sciences,89
+Electrochemistry,Physical Sciences,2
+"Electronic, Optical and Magnetic Materials",Physical Sciences,12
+Emergency Medical Services,Health Sciences,12
+Emergency Medicine,Health Sciences,32
+Endocrine and Autonomic Systems,Life Sciences,21
+Endocrinology,Life Sciences,11
+"Endocrinology, Diabetes and Metabolism",Health Sciences,92
+Energy Engineering and Power Technology,Physical Sciences,0
+Environmental Chemistry,Physical Sciences,8
+Environmental Engineering,Physical Sciences,25
+Epidemiology,Health Sciences,143
+Equine,Health Sciences,0
+Experimental and Cognitive Psychology,Social Sciences,55
+Family Practice,Health Sciences,8
+Filtration and Separation,Physical Sciences,0
+Finance,Social Sciences,37
+Fluid Flow and Transfer Processes,Physical Sciences,1
+Food Science,Life Sciences,7
+Forestry,Life Sciences,2
+Fuel Technology,Physical Sciences,0
+Gastroenterology,Health Sciences,7
+Gender Studies,Social Sciences,53
+General Agricultural and Biological Sciences,Life Sciences,2
+General Arts and Humanities,Social Sciences,1
+General Decision Sciences,Social Sciences,3
+General Dentistry,Health Sciences,0
+"General Economics, Econometrics and Finance",Social Sciences,17
+General Energy,Physical Sciences,1
+General Health Professions,Health Sciences,79
+General Materials Science,Physical Sciences,1
+General Psychology,Social Sciences,0
+General Social Sciences,Social Sciences,4
+Genetics,Health Sciences,110
+Geochemistry and Petrology,Physical Sciences,1
+"Geography, Planning and Development",Social Sciences,2
+Geology,Physical Sciences,4
+Geometry and Topology,Physical Sciences,26
+Geophysics,Physical Sciences,4
+Geriatrics and Gerontology,Health Sciences,10
+Global and Planetary Change,Physical Sciences,55
+Hardware and Architecture,Physical Sciences,7
+Health,Social Sciences,22
+Health Informatics,Health Sciences,30
+Health Information Management,Health Sciences,11
+"Health, Toxicology and Mutagenesis",Physical Sciences,24
+Hematology,Health Sciences,30
+Hepatology,Health Sciences,10
+History,Social Sciences,15
+History and Philosophy of Science,Social Sciences,13
+Horticulture,Life Sciences,0
+Human Factors and Ergonomics,Social Sciences,0
+Human-Computer Interaction,Physical Sciences,17
+Immunology,Life Sciences,71
+Immunology and Allergy,Health Sciences,11
+Industrial and Manufacturing Engineering,Physical Sciences,7
+Infectious Diseases,Health Sciences,74
+Information Systems,Physical Sciences,43
+Information Systems and Management,Social Sciences,18
+Inorganic Chemistry,Physical Sciences,4
+Insect Science,Life Sciences,2
+Instrumentation,Physical Sciences,12
+Internal Medicine,Health Sciences,11
+"Issues, ethics and legal aspects",Health Sciences,1
+Language and Linguistics,Social Sciences,10
+Law,Social Sciences,29
+Leadership and Management,Health Sciences,0
+Library and Information Sciences,Social Sciences,1
+Life-span and Life-course Studies,Social Sciences,1
+Linguistics and Language,Social Sciences,6
+Literature and Literary Theory,Social Sciences,19
+Management Information Systems,Social Sciences,36
+Management Science and Operations Research,Social Sciences,36
+Management of Technology and Innovation,Social Sciences,11
+"Management, Monitoring, Policy and Law",Physical Sciences,15
+Marketing,Social Sciences,15
+Materials Chemistry,Physical Sciences,81
+Mathematical Physics,Physical Sciences,13
+Mechanical Engineering,Physical Sciences,41
+Mechanics of Materials,Physical Sciences,16
+Media Technology,Physical Sciences,19
+Medical Laboratory Technology,Health Sciences,2
+Medical Terminology,Health Sciences,0
+Metals and Alloys,Physical Sciences,3
+Microbiology,Health Sciences,14
+Modeling and Simulation,Physical Sciences,9
+Molecular Biology,Life Sciences,296
+Molecular Medicine,Life Sciences,11
+Museology,Social Sciences,4
+Music,Social Sciences,2
+Nature and Landscape Conservation,Physical Sciences,7
+Nephrology,Health Sciences,25
+Neurology,Health Sciences,39
+Neuropsychology and Physiological Psychology,Social Sciences,2
+Nuclear and High Energy Physics,Physical Sciences,42
+Numerical Analysis,Physical Sciences,0
+Nutrition and Dietetics,Health Sciences,25
+Obstetrics and Gynecology,Health Sciences,18
+Occupational Therapy,Health Sciences,5
+Ocean Engineering,Physical Sciences,8
+Oceanography,Physical Sciences,12
+Oncology,Health Sciences,126
+Ophthalmology,Health Sciences,16
+Oral Surgery,Health Sciences,1
+Organic Chemistry,Physical Sciences,26
+Organizational Behavior and Human Resource Management,Social Sciences,15
+Orthodontics,Health Sciences,0
+Orthopedics and Sports Medicine,Health Sciences,18
+Otorhinolaryngology,Health Sciences,8
+Paleontology,Physical Sciences,2
+Parasitology,Life Sciences,8
+Pathology and Forensic Medicine,Health Sciences,67
+"Pediatrics, Perinatology and Child Health",Health Sciences,50
+Periodontics,Health Sciences,1
+Pharmaceutical Science,Life Sciences,2
+Pharmacology,Health Sciences,5
+Pharmacy,Health Sciences,10
+Philosophy,Social Sciences,21
+"Physical Therapy, Sports Therapy and Rehabilitation",Health Sciences,2
+Physical and Theoretical Chemistry,Physical Sciences,3
+Physiology,Health Sciences,2
+Plant Science,Life Sciences,31
+Political Science and International Relations,Social Sciences,92
+Pollution,Physical Sciences,6
+Polymers and Plastics,Physical Sciences,7
+Process Chemistry and Technology,Physical Sciences,1
+Psychiatry and Mental health,Health Sciences,66
+Public Administration,Social Sciences,2
+"Public Health, Environmental and Occupational Health",Health Sciences,124
+Pulmonary and Respiratory Medicine,Health Sciences,184
+Radiation,Physical Sciences,7
+Radiological and Ultrasound Technology,Health Sciences,2
+"Radiology, Nuclear Medicine and Imaging",Health Sciences,88
+Rehabilitation,Health Sciences,7
+Religious studies,Social Sciences,3
+"Renewable Energy, Sustainability and the Environment",Physical Sciences,12
+Reproductive Medicine,Health Sciences,24
+Research and Theory,Health Sciences,0
+Rheumatology,Health Sciences,26
+Safety Research,Social Sciences,51
+"Safety, Risk, Reliability and Quality",Physical Sciences,6
+Sensory Systems,Life Sciences,8
+Signal Processing,Physical Sciences,12
+Small Animals,Health Sciences,1
+Social Psychology,Social Sciences,74
+Sociology and Political Science,Social Sciences,164
+Software,Physical Sciences,7
+Soil Science,Life Sciences,2
+Space and Planetary Science,Physical Sciences,1
+Spectroscopy,Physical Sciences,19
+Speech and Hearing,Health Sciences,10
+Statistical and Nonlinear Physics,Physical Sciences,23
+Statistics and Probability,Physical Sciences,29
+"Statistics, Probability and Uncertainty",Social Sciences,14
+Strategy and Management,Social Sciences,29
+Structural Biology,Life Sciences,3
+"Surfaces, Coatings and Films",Physical Sciences,1
+Surgery,Health Sciences,282
+Theoretical Computer Science,Physical Sciences,1
+"Tourism, Leisure and Hospitality Management",Social Sciences,0
+Toxicology,Life Sciences,1
+Transplantation,Health Sciences,6
+Transportation,Social Sciences,4
+Urban Studies,Social Sciences,8
+Urology,Health Sciences,4
+Virology,Life Sciences,4
+Visual Arts and Performing Arts,Social Sciences,4
+Water Science and Technology,Physical Sciences,11

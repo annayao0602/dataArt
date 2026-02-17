@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Circos Chart Animation</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Forum&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Forum', serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center; 
+            background-color: #000000;
+            
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+        }
+        #year-display {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ffffff; /* Changed to white to contrast black background */
+        }
+        #chart-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="year-display">Loading Data...</div>
+    
+    <div id="chart-container"></div>
+
+    <script>
+        // Define the global animation speed (2 seconds per year)
+        const transitionSpeed = 2000;
+
+        const CircosChart = function(selector, options) {
+
+            // 1. Configuration 
+            const windowWidth = window.innerWidth;
+            // Subtract a little height so the year text has room
+            const windowHeight = window.innerHeight - 60; 
+            
+            // Find the smallest dimension to ensure the circle fits on screen
+            const minDimension = Math.min(windowWidth, windowHeight);
+
+            const cfg = {
+                // Set margins small since we want it big
+                margin: {top: 20, right: 20, bottom: 20, left: 20},
+                
+                // Set inner radius relative to the screen size (e.g., 10% of the radius)
+                innerRadius: minDimension * 0.05, 
+                
+                maxValue: 400, 
+            };
+
+            // Calculate exact width and height based on the available space
+            cfg.width = minDimension - cfg.margin.left - cfg.margin.right;
+            cfg.height = minDimension - cfg.margin.top - cfg.margin.bottom;
+            
+            // Set the outer radius to fill the available area
+            cfg.outerRadius = Math.min(cfg.width, cfg.height) / 2;
+
+            if ('undefined' !== typeof options) {
+                for (let i in options) {
+                    if ('undefined' !== typeof options[i]) { cfg[i] = options[i]; }
+                }
+            }
+
+            // 2. Setup SVG
+            let svgContainer = d3.select(selector).select("svg");
+            let svg;
+
+            if (svgContainer.empty()) {
+                svgContainer = d3.select(selector)
+                    .append("svg")
+                    .attr("width", cfg.width + cfg.margin.left + cfg.margin.right)
+                    .attr("height", cfg.height + cfg.margin.top + cfg.margin.bottom);
+                    
+                svg = svgContainer.append("g")
+                    .attr("transform", `translate(${cfg.width / 2 + cfg.margin.left},${cfg.height / 2 + cfg.margin.top})`);
+            } else {
+                svg = svgContainer.select("g");
+            }
+
+            // 3. The Update Function
+            function update(main_data) {
+                
+                main_data.forEach((d) => {
+                    d.value = Number(d.numpub); 
+                    d.uniqueId = d.field; 
+                });
+
+                const quadrantOrder = {
+                    "health sciences": 1,             
+                    "life sciences": 2,               
+                    "physical sciences": 3,  
+                    "social sciences": 4     
+                };
+
+                main_data.sort((a, b) => {
+                    const orderA = quadrantOrder[a.domain.toLowerCase()] || 5; 
+                    const orderB = quadrantOrder[b.domain.toLowerCase()] || 5;
+                    
+                    if (orderA === orderB) {
+                        return a.field.localeCompare(b.field);
+                    }
+                    return orderA - orderB;
+                });
+
+                // Scales
+                const x = d3.scaleBand()
+                    .range([0, 2 * Math.PI])
+                    .align(0)
+                    .padding(0)
+                    .domain(main_data.map(d => d.uniqueId));
+
+                const y = d3.scaleLinear()
+                    .range([cfg.innerRadius, cfg.outerRadius])
+                    .domain([0, cfg.maxValue])
+                    .clamp(true);
+
+                const allDomains = [...new Set(main_data.map(d => d.domain))];
+                const domainColor = d3.scaleOrdinal()
+                    .domain(allDomains)
+                    .range(["#ffffff"]); // Note: all bars are currently white!
+
+                const arc = d3.arc()
+                    .innerRadius(cfg.innerRadius)
+                    .outerRadius(d => y(d.value))
+                    .startAngle(d => x(d.uniqueId))
+                    .endAngle(d => x(d.uniqueId) + x.bandwidth())
+                    .padAngle(0)
+                    .padRadius(cfg.innerRadius);
+
+                const bars = svg.selectAll("path.bar")
+                    .data(main_data, d => d.uniqueId); 
+
+                const barsEnter = bars.enter()
+                    .append("path")
+                    .attr("class", "bar")
+                    .attr("fill", d => domainColor(d.domain))
+                    .attr("stroke", "white")
+                    .attr("stroke-width", 0.1)
+                    .attr("d", d3.arc().innerRadius(cfg.innerRadius).outerRadius(cfg.innerRadius).startAngle(d => x(d.uniqueId)).endAngle(d => x(d.uniqueId) + x.bandwidth())); 
+
+                // ADDED: .ease(d3.easeLinear) for continuous fluid motion
+                barsEnter.merge(bars)
+                    .transition()
+                    .duration(transitionSpeed)
+                    .ease(d3.easeLinear) 
+                    .attrTween("d", function(d) {
+                        const interpolate = d3.interpolate(this._current || {
+                            innerRadius: cfg.innerRadius,
+                            outerRadius: cfg.innerRadius,
+                            startAngle: x(d.uniqueId),
+                            endAngle: x(d.uniqueId)
+                        }, d);
+                        this._current = interpolate(1); 
+                        return function(t) {
+                            return arc(interpolate(t));
+                        };
+                    });
+
+                // ADDED: .ease(d3.easeLinear)
+                bars.exit()
+                    .transition()
+                    .duration(transitionSpeed)
+                    .ease(d3.easeLinear)
+                    .attrTween("d", function(d) {
+                        const interpolate = d3.interpolate(this._current, {
+                            ...this._current,
+                            outerRadius: cfg.innerRadius 
+                        });
+                        return function(t) {
+                            return arc(interpolate(t));
+                        };
+                    })
+                    .remove();
+            }
+
+            return { update: update };
+        };
+
+        // --- ANIMATION SEQUENCE LOGIC ---
+        const myChart = CircosChart("#chart-container");
+        const startYear = 2010;
+        const endYear = 2025;
+        const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+        async function playTimeline() {
+            // 1. PRE-LOAD DATA: Fetch everything before starting the animation
+            const timelineData = {};
+            for (let year = startYear; year <= endYear; year++) {
+                try {
+                    timelineData[year] = await d3.csv(`timeline_data_fixed/uva_data_${year}.csv`);
+                } catch (error) {
+                    console.error(`Missing data for ${year}:`, error);
+                }
+            }
+
+            // 2. RUN ANIMATION
+            while (true) { 
+                for (let year = startYear; year <= endYear; year++) {
+                    if (!timelineData[year]) continue; // Skip if file didn't load
+                    
+                    d3.select("#year-display").text(`Year: ${year}`);
+                    myChart.update(timelineData[year]);
+
+                    // Wait exactly the length of the transition so they chain perfectly
+                    await sleep(transitionSpeed); 
+                }
+                
+                // Pause for 2 seconds at the end of the timeline before restarting
+                d3.select("#year-display").text("Restarting...");
+                await sleep(2000); 
+            }
+        }
+
+        playTimeline();
+
+    </script>
+</body>
+</html>
