@@ -26,7 +26,8 @@
         #year-display {
             font-size: 1.5rem;
             font-weight: bold;
-            color: #ffffff; /* Changed to white to contrast black background */
+            margin-bottom: 50px;
+            color: #bbbbbb; 
         }
         #chart-container {
             display: flex;
@@ -37,9 +38,10 @@
 </head>
 <body>
 
-    <div id="year-display">Loading Data...</div>
     
     <div id="chart-container"></div>
+    <div id="year-display">Loading Data...</div>
+
 
     <script>
         // Define the global animation speed (2 seconds per year)
@@ -215,7 +217,7 @@
                 for (let year = startYear; year <= endYear; year++) {
                     if (!timelineData[year]) continue; // Skip if file didn't load
                     
-                    d3.select("#year-display").text(`Year: ${year}`);
+                    d3.select("#year-display").text(`${year}`);
                     myChart.update(timelineData[year]);
 
                     // Wait exactly the length of the transition so they chain perfectly
@@ -223,7 +225,7 @@
                 }
                 
                 // Pause for 2 seconds at the end of the timeline before restarting
-                d3.select("#year-display").text("Restarting...");
+                d3.select("#year-display").text("");
                 await sleep(2000); 
             }
         }
