@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>UVA Research Visualization (SVG & PNG)</title>
+    <link href='https://fonts.googleapis.com/css?family=Jura' rel='stylesheet'>
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <script src="circos_laser.js"></script>
+
+    <style>
+        body { font-family: 'Jura', sans-serif; background: #f4f4f4; padding: 20px; }
+        h1 { text-align: center; color: #333; margin-bottom: 10px; }
+        .subtitle { text-align: center; color: #666; margin-bottom: 30px; }
+        .header-controls { text-align: center; margin-bottom: 40px; }
+        
+        .btn-download-all {
+            padding: 15px 30px; background: #bc5090; color: white;
+            border: none; cursor: pointer; border-radius: 8px; margin: 0 10px;
+            font-family: 'Jura'; font-size: 18px; font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2); transition: transform 0.2s, background 0.2s;
+        }
+        .btn-download-all:hover { background: #d45087; transform: scale(1.05); }
+        .btn-download-all:active { transform: scale(0.95); }
+        .btn-png-all { background: #58508d; } /* Different color for PNG master button */
+        .btn-png-all:hover { background: #7a5195; }
+        
+        .gallery { display: flex; flex-wrap: wrap; gap: 30px; justify-content: center; }
+        .card { padding: 15px; text-align: center; width: 600px; background: white; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        .viz-container { width: 500px; height: 500px; margin: 0 auto; }
+        
+        .button-group { margin-top: 15px; display: flex; justify-content: center; gap: 10px; }
+        .btn-card {
+            padding: 10px 20px; background: #003f5c; color: white;
+            border: none; cursor: pointer; border-radius: 5px;
+            font-family: 'Jura'; font-size: 14px; transition: background 0.3s;
+        }
+        .btn-card:hover { background: #006391; }
+        .btn-card-png { background: #ffa600; color: #333; font-weight: bold; }
+        .btn-card-png:hover { background: #ffbc33; }
+    </style>
+</head>
+<body>
+
+<div class="header-controls">
+    <h1>UVA Research Visualization</h1>
+    <p class="subtitle">Laser Print & Digital Asset Generator</p>
+    <button class="btn-download-all" onclick="downloadAll('svg')">Download All SVGs</button>
+    <button class="btn-download-all btn-png-all" onclick="downloadAll('png')">Download All PNGs</button>
+</div>
+
+<div id="gallery" class="gallery"></div>
+
+<script>
+    const gallery = d3.select("#gallery");
+
+    const configurations = [
+        { id: "solid", title: "Solid Fills", outlineOnly: false, hasLogo: false },
+        { id: "solid_logo", title: "Solid Fills + Logo", outlineOnly: false, hasLogo: true },
+        { id: "outline", title: "Pure Outline", outlineOnly: true, hasLogo: false},
+        { id: "outline_logo", title: "Outline + Logo", outlineOnly: true, hasLogo: true }
+    ];
+
+    configurations.forEach(config => {
+        const card = gallery.append("div").attr("class", "card");
+        card.append("h3").text(config.title);
+        card.append("div").attr("id", `viz-${config.id}`).attr("class", "viz-container");
+        
+        // Create a button container so they sit nicely side-by-side
+        const btnGroup = card.append("div").attr("class", "button-group");
+
+        btnGroup.append("button")
+            .attr("class", "btn-card btn-svg") 
+            .text(`SVG`)
+            .on("click", function() { downloadRawSVG(`viz-${config.id}`, `UVA_${config.id}.svg`); });
+
+        btnGroup.append("button")
+            .attr("class", "btn-card btn-card-png btn-png") 
+            .text(`PNG`)
+            .on("click", function() { downloadSVGAsPNG(`viz-${config.id}`, `UVA_${config.id}.png`); });
+    });
+
+    d3.csv(`../r1_data/UVA.csv`, function(error, data) {
+        if (error) { console.error("Error loading CSV", error); return; }
+
+        configurations.forEach(config => {
+            const containerId = `#viz-${config.id}`;
+            
+            CircosChart(containerId, data, {
+                width: 500, height: 500,
+                margin: {top: 25, right: 25, bottom: 25, left: 25},
+                innerRadius: 90, outerRadius: 230, maxValue: 2800,
+                outlineOnly: config.outlineOnly 
+            });
+
+            if (config.hasLogo) {
+                const svgG = d3.select(`${containerId} svg g`);
+                const logoSize = 60; 
+                svgG.append("image")
+                    .attr("href", "cdh_logo.png") 
+                    .attr("x", -logoSize / 2)
+                    .attr("y", -logoSize / 2)
+                    .attr("width", logoSize)
+                    .attr("height", logoSize);
+            }
+        });
+    });
+
+    // --- 1. SVG RAW DOWNLOAD LOGIC ---
+    function downloadRawSVG(selector, filename) {
+        const svgElement = document.querySelector(`#${selector} svg`);
+        if (!svgElement) return;
+
+        const serializer = new XMLSerializer();
+        let svgString = serializer.serializeToString(svgElement);
+
+        if (!svgString.match(/^<svg[^>]+xmlns="http\:\/\/www\.w3\.org\/2000\/svg"/)) {
+            svgString = svgString.replace(/^<svg/, '<svg xmlns="http://www.w3.org/2000/svg"');
+        }
+
+        const blob = new Blob([svgString], {type: "image/svg+xml;charset=utf-8"});
+        const url = URL.createObjectURL(blob);
+        
+        const link = document.createElement('a');
+        link.download = filename;
+        link.href = url;
+        link.click();
+        
+        URL.revokeObjectURL(url);
+    }
+
+    // --- 2. PNG RASTER DOWNLOAD LOGIC ---
+    function downloadSVGAsPNG(selector, filename) {
+        const svgElement = document.querySelector(`#${selector} svg`);
+        if (!svgElement) return;
+
+        const serializer = new XMLSerializer();
+        let svgString = serializer.serializeToString(svgElement);
+
+        if (!svgString.match(/^<svg[^>]+xmlns="http\:\/\/www\.w3\.org\/2000\/svg"/)) {
+            svgString = svgString.replace(/^<svg/, '<svg xmlns="http://www.w3.org/2000/svg"');
+        }
+
+        // Scale factor 4 makes it a crisp 2000x2000px image instead of a blurry 500x500px image
+        const scaleFactor = 4; 
+        const width = 500 * scaleFactor;
+        const height = 500 * scaleFactor;
+        
+        const canvas = document.createElement("canvas");
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext("2d");
+
+        const img = new Image();
+        // Base64 encoding properly handles any weird characters in the SVG
+        img.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgString)));
+
+        img.onload = function() {
+            ctx.drawImage(img, 0, 0, width, height);
+            
+            const link = document.createElement('a');
+            link.download = filename;
+            link.href = canvas.toDataURL("image/png");
+            link.click();
+        };
+    }
+
+    // --- 3. DOWNLOAD ALL LOGIC ---
+    function downloadAll(type) {
+        // type will be either 'svg' or 'png'
+        const targetClass = type === 'svg' ? '.btn-svg' : '.btn-png';
+        const allButtons = document.querySelectorAll(targetClass);
+        
+        allButtons.forEach((btn, index) => {
+            // Stagger the clicks slightly so the browser doesn't block multiple downloads
+            setTimeout(() => { btn.click(); }, index * 800); 
+        });
+    }
+</script>
+
+</body>
+</html>
