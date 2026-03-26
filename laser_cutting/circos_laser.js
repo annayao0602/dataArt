@@ -55,7 +55,15 @@ const CircosChart = function CircosChart(selector, main_data, options) {
     const allDomains = [...new Set(main_data.map(d => d.Domain))];
     const domainColor = d3.scaleOrdinal()
         .domain(allDomains)
-        .range(["#003f5c", "#bc5090", "#58508d", "#ffa600", "#ef5675", "#7a5195"]);
+        .range(["#000000"]);
+
+    svg.append("circle")
+            .attr("cx", 0)
+            .attr("cy", 0)
+            .attr("r", cfg.outerRadius + 15)
+            .style("fill", "none")
+            .style("stroke", "#ff0000") // Red for laser
+            .style("stroke-width", "1px");
 
     // 5. Draw Bars (Static) or Laser Outline
     if (cfg.outlineOnly) {
@@ -89,7 +97,7 @@ const CircosChart = function CircosChart(selector, main_data, options) {
         laserGroup.append("path")
             .attr("d", pathString)
             .style("fill", "none")
-            .style("stroke", "#FF0000") // Red for laser
+            .style("stroke", "#ff0000") // Red for laser
             .style("stroke-width", "1px");
 
         // Inner circle cutout
@@ -98,7 +106,23 @@ const CircosChart = function CircosChart(selector, main_data, options) {
             .attr("cy", 0)
             .attr("r", cfg.innerRadius)
             .style("fill", "none")
-            .style("stroke", "#FF0000") // Red for laser
+            .style("stroke", "#ff0000") // Red for laser
+            .style("stroke-width", "1px");
+
+        laserGroup.append("circle")
+            .attr("cx", 0)
+            .attr("cy", 0)
+            .attr("r", cfg.outerRadius + 15)
+            .style("fill", "none")
+            .style("stroke", "#ff0000") // Red for laser
+            .style("stroke-width", "1px");
+
+        laserGroup.append("circle")
+            .attr("cx", 0)
+            .attr("cy", 0)
+            .attr("r", cfg.outerRadius + 30)
+            .style("fill", "none")
+            .style("stroke", "#ff0000") // Red for laser
             .style("stroke-width", "1px");
 
     } else {
@@ -120,25 +144,7 @@ const CircosChart = function CircosChart(selector, main_data, options) {
             .attr("d", arc)
             .attr("stroke-width", "none");
 
-        // 6. Draw Plus Signs for Overflow
-        const overflowData = main_data.filter(d => d.value > cfg.maxValue);
         
-        svg.append("g")
-            .selectAll("text")
-            .data(overflowData)
-            .enter()
-            .append("text")
-            .text("+")
-            .attr("text-anchor", "middle")
-            .attr("alignment-baseline", "middle")
-            .style("font-size", "10px")
-            .style("font-weight", "bold")
-            .style("fill", d => domainColor(d.Domain))
-            .attr("transform", d => {
-                const angle = (x(d.uniqueId) + x.bandwidth() / 2) * 180 / Math.PI - 90;
-                const r = cfg.outerRadius + 8; 
-                return `rotate(${angle}) translate(${r},0)`;
-            });
     }
 
     function toggleAxesVisibility() {}
