@@ -57,14 +57,6 @@ const CircosChart = function CircosChart(selector, main_data, options) {
         .domain(allDomains)
         .range(["#000000"]);
 
-    svg.append("circle")
-            .attr("cx", 0)
-            .attr("cy", 0)
-            .attr("r", cfg.outerRadius + 15)
-            .style("fill", "none")
-            .style("stroke", "#ff0000") // Red for laser
-            .style("stroke-width", "1px");
-
     // 5. Draw Bars (Static) or Laser Outline
     if (cfg.outlineOnly) {
         
@@ -105,22 +97,6 @@ const CircosChart = function CircosChart(selector, main_data, options) {
             .attr("cx", 0)
             .attr("cy", 0)
             .attr("r", cfg.innerRadius)
-            .style("fill", "none")
-            .style("stroke", "#ff0000") // Red for laser
-            .style("stroke-width", "1px");
-
-        laserGroup.append("circle")
-            .attr("cx", 0)
-            .attr("cy", 0)
-            .attr("r", cfg.outerRadius + 15)
-            .style("fill", "none")
-            .style("stroke", "#ff0000") // Red for laser
-            .style("stroke-width", "1px");
-
-        laserGroup.append("circle")
-            .attr("cx", 0)
-            .attr("cy", 0)
-            .attr("r", cfg.outerRadius + 30)
             .style("fill", "none")
             .style("stroke", "#ff0000") // Red for laser
             .style("stroke-width", "1px");
