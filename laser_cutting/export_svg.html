@@ -24,8 +24,8 @@
         .btn-png-all:hover { background: #7a5195; }
         
         .gallery { display: flex; flex-wrap: wrap; gap: 30px; justify-content: center; }
-        .card { padding: 15px; text-align: center; width: 600px; background: white; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
-        .viz-container { width: 500px; height: 500px; margin: 0 auto; }
+        .card { padding: 15px; text-align: center; width: 700px; background: white; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        .viz-container { width: 700px; height: 700px; margin: 0 auto; }
         
         .button-group { margin-top: 15px; display: flex; justify-content: center; gap: 10px; }
         .btn-card {
@@ -53,10 +53,8 @@
     const gallery = d3.select("#gallery");
 
     const configurations = [
-        { id: "solid", title: "Solid Fills", outlineOnly: false, hasLogo: false },
-        { id: "solid_logo", title: "Solid Fills + Logo", outlineOnly: false, hasLogo: true },
-        { id: "outline", title: "Pure Outline", outlineOnly: true, hasLogo: false},
-        { id: "outline_logo", title: "Outline + Logo", outlineOnly: true, hasLogo: true }
+        { id: "solid", title: "Solid Fills", outlineOnly: false, outerArc: true},
+        { id: "outline", title: "Pure Outline", outlineOnly: true},
     ];
 
     configurations.forEach(config => {
@@ -78,29 +76,18 @@
             .on("click", function() { downloadSVGAsPNG(`viz-${config.id}`, `UVA_${config.id}.png`); });
     });
 
-    d3.csv(`../r1_data/UVA.csv`, function(error, data) {
+    d3.csv(`../numpub.csv`, function(error, data) {
         if (error) { console.error("Error loading CSV", error); return; }
 
         configurations.forEach(config => {
             const containerId = `#viz-${config.id}`;
             
             CircosChart(containerId, data, {
-                width: 500, height: 500,
+                width: 600, height: 600,
                 margin: {top: 25, right: 25, bottom: 25, left: 25},
-                innerRadius: 60, outerRadius: 230, maxValue: 2800,
+                innerRadius: 60, outerRadius: 230, maxValue: 10000,
                 outlineOnly: config.outlineOnly 
             });
-
-            if (config.hasLogo) {
-                const svgG = d3.select(`${containerId} svg g`);
-                const logoSize = 60; 
-                svgG.append("image")
-                    .attr("href", "cdh_logo.png") 
-                    .attr("x", -logoSize / 2)
-                    .attr("y", -logoSize / 2)
-                    .attr("width", logoSize)
-                    .attr("height", logoSize);
-            }
         });
     });
 
