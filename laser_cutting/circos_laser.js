@@ -61,7 +61,71 @@ const CircosChart = function CircosChart(selector, main_data, options) {
         .range(["#000000"]);
     
     if (!cfg.outlineOnly) {
-        if (cfg.outerArc) {
+         // --- ORIGINAL SOLID BAR LOGIC ---
+        const arc = d3.arc()
+            .innerRadius(cfg.innerRadius)
+            .outerRadius(d => y(d.value))
+            .startAngle(d => x(d.uniqueId))
+            .endAngle(d => x(d.uniqueId) + x.bandwidth())
+            .padAngle(0)
+            .padRadius(cfg.innerRadius);
+
+        svg.append("g")
+            .selectAll("path")
+            .data(filtered_data)
+            .enter()
+            .append("path")
+            .attr("fill", d => domainColor(d.Domain))
+            .attr("d", arc)
+            .style("stroke", "none"); 
+}
+
+    // 5. Draw Bars (Static) or Laser Outline
+    if (cfg.outlineOnly) {
+        
+        let pathString = "";
+        
+        // Helper functions to convert polar to Cartesian
+        const getX = (a, r) => r * Math.sin(a);
+        const getY = (a, r) => -r * Math.cos(a);
+
+        filtered_data.forEach((d, i) => {
+            const startAngle = x(d.uniqueId);
+            const endAngle = startAngle + x.bandwidth();
+            const radius = y(d.value);
+
+            if (i === 0) {
+                pathString += `M ${getX(startAngle, radius)} ${getY(startAngle, radius)}`;
+            } else {
+                pathString += `L ${getX(startAngle, radius)} ${getY(startAngle, radius)}`;
+            }
+
+            // Draw the curved arc
+            pathString += ` A ${radius} ${radius} 0 0 1 ${getX(endAngle, radius)} ${getY(endAngle, radius)}`;
+        });
+
+        pathString += " Z"; // Close path
+
+        const laserGroup = svg.append("g");
+
+        // Outer silhouette
+        laserGroup.append("path")
+            .attr("d", pathString)
+            .style("fill", "none")
+            .style("stroke", "#ff0000") // Red for laser
+            .style("stroke-width", "1px");
+
+        // Inner circle cutout
+        laserGroup.append("circle")
+            .attr("cx", 0)
+            .attr("cy", 0)
+            .attr("r", cfg.innerRadius)
+            .style("fill", "none")
+            .style("stroke", "#ff0000") // Red for laser
+            .style("stroke-width", "1px");
+
+    } 
+    if (cfg.outerArc) {
             const yAxisGroup = svg.append("g").attr("class", "axis");
             const gridData = y.ticks(8).slice(1);
 
@@ -120,73 +184,6 @@ const CircosChart = function CircosChart(selector, main_data, options) {
                 .style("stroke", "#000000")
                 .style("stroke-width", "1px");
         }
-}
-
-    // 5. Draw Bars (Static) or Laser Outline
-    if (cfg.outlineOnly) {
-        
-        let pathString = "";
-        
-        // Helper functions to convert polar to Cartesian
-        const getX = (a, r) => r * Math.sin(a);
-        const getY = (a, r) => -r * Math.cos(a);
-
-        filtered_data.forEach((d, i) => {
-            const startAngle = x(d.uniqueId);
-            const endAngle = startAngle + x.bandwidth();
-            const radius = y(d.value);
-
-            if (i === 0) {
-                pathString += `M ${getX(startAngle, radius)} ${getY(startAngle, radius)}`;
-            } else {
-                pathString += `L ${getX(startAngle, radius)} ${getY(startAngle, radius)}`;
-            }
-
-            // Draw the curved arc
-            pathString += ` A ${radius} ${radius} 0 0 1 ${getX(endAngle, radius)} ${getY(endAngle, radius)}`;
-        });
-
-        pathString += " Z"; // Close path
-
-        const laserGroup = svg.append("g");
-
-        // Outer silhouette
-        laserGroup.append("path")
-            .attr("d", pathString)
-            .style("fill", "none")
-            .style("stroke", "#ff0000") // Red for laser
-            .style("stroke-width", "1px");
-
-        // Inner circle cutout
-        laserGroup.append("circle")
-            .attr("cx", 0)
-            .attr("cy", 0)
-            .attr("r", cfg.innerRadius)
-            .style("fill", "none")
-            .style("stroke", "#ff0000") // Red for laser
-            .style("stroke-width", "1px");
-
-    } else {
-        // --- ORIGINAL SOLID BAR LOGIC ---
-        const arc = d3.arc()
-            .innerRadius(cfg.innerRadius)
-            .outerRadius(d => y(d.value))
-            .startAngle(d => x(d.uniqueId))
-            .endAngle(d => x(d.uniqueId) + x.bandwidth())
-            .padAngle(0)
-            .padRadius(cfg.innerRadius);
-
-        svg.append("g")
-            .selectAll("path")
-            .data(filtered_data)
-            .enter()
-            .append("path")
-            .attr("fill", d => domainColor(d.Domain))
-            .attr("d", arc)
-            .style("stroke", "none");
-
-        
-    }
 
 
     function toggleAxesVisibility() {}

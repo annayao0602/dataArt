@@ -55,6 +55,7 @@
     const configurations = [
         { id: "solid", title: "Solid Fills", outlineOnly: false, outerArc: true},
         { id: "outline", title: "Pure Outline", outlineOnly: true},
+        { id: "outline-arc", title: "Outline + Arc", outlineOnly: true, outerArc: true}
     ];
 
     configurations.forEach(config => {
@@ -86,7 +87,8 @@
                 width: 600, height: 600,
                 margin: {top: 25, right: 25, bottom: 25, left: 25},
                 innerRadius: 60, outerRadius: 230, maxValue: 10000,
-                outlineOnly: config.outlineOnly 
+                outlineOnly: config.outlineOnly,
+                outerArc: config.outerArc || false 
             });
         });
     });
