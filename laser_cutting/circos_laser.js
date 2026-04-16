@@ -8,7 +8,8 @@ const CircosChart = function CircosChart(selector, main_data, options) {
         maxValue: 1500,
         labels: false,
         outlineOnly: false, // Toggles between laser cut and solid fill
-        outerArc: false
+        outerArc: false,
+        sunburst: true
     }
 
     // Adjust width/height based on container
@@ -60,7 +61,7 @@ const CircosChart = function CircosChart(selector, main_data, options) {
         .domain(allDomains)
         .range(["#000000"]);
     
-    if (!cfg.outlineOnly) {
+    if (cfg.sunburst && !cfg.outlineOnly) {
          // --- ORIGINAL SOLID BAR LOGIC ---
         const arc = d3.arc()
             .innerRadius(cfg.innerRadius)
@@ -81,7 +82,7 @@ const CircosChart = function CircosChart(selector, main_data, options) {
 }
 
     // 5. Draw Bars (Static) or Laser Outline
-    if (cfg.outlineOnly) {
+    if (cfg.sunburst && cfg.outlineOnly) {
         
         let pathString = "";
         
@@ -112,7 +113,7 @@ const CircosChart = function CircosChart(selector, main_data, options) {
         laserGroup.append("path")
             .attr("d", pathString)
             .style("fill", "none")
-            .style("stroke", "#ff0000") // Red for laser
+            .style("stroke", "#0000ff") // Red for laser
             .style("stroke-width", "1px");
 
         // Inner circle cutout
@@ -121,10 +122,25 @@ const CircosChart = function CircosChart(selector, main_data, options) {
             .attr("cy", 0)
             .attr("r", cfg.innerRadius)
             .style("fill", "none")
-            .style("stroke", "#ff0000") // Red for laser
+            .style("stroke", "#0000ff") // Red for laser
             .style("stroke-width", "1px");
 
     } 
+    if (!cfg.sunburst && cfg.outerArc) {
+        const tickGroup = svg.append("g").attr("class", "alignment-ticks");
+        
+        const tickAngles = [...new Set(filtered_data.map(d => x(d.uniqueId)))];
+
+        tickGroup.selectAll(".align-tick")
+            .data(tickAngles)
+            .enter().append("line")
+            .attr("x1", d => Math.sin(d) * (cfg.innerRadius - 0.25))
+            .attr("y1", d => -Math.cos(d) * (cfg.innerRadius - 0.25))
+            .attr("x2", d => Math.sin(d) * (cfg.innerRadius + 0.25))
+            .attr("y2", d => -Math.cos(d) * (cfg.innerRadius + 0.25))
+            .style("stroke", "#0000ff")
+            .style("stroke-width", "0.5px");
+    }
     if (cfg.outerArc) {
             const yAxisGroup = svg.append("g").attr("class", "axis");
             const gridData = y.ticks(8).slice(1);

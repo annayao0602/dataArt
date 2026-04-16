@@ -53,9 +53,10 @@
     const gallery = d3.select("#gallery");
 
     const configurations = [
-        { id: "solid", title: "Solid Fills", outlineOnly: false, outerArc: true},
-        { id: "outline", title: "Pure Outline", outlineOnly: true},
-        { id: "outline-arc", title: "Outline + Arc", outlineOnly: true, outerArc: true}
+        { id: "solid", title: "Solid Fills", outlineOnly: false, outerArc: true, sunburst: true},
+        { id: "outline", title: "Pure Outline", outlineOnly: true, sunburst: true},
+        { id: "outline-arc", title: "Outline + Arc", outlineOnly: true, outerArc: true, sunburst: true},
+        { id: "arc-only", title: "Arc Only", outlineOnly: true, outerArc: true, sunburst: false}
     ];
 
     configurations.forEach(config => {
@@ -88,7 +89,8 @@
                 margin: {top: 25, right: 25, bottom: 25, left: 25},
                 innerRadius: 60, outerRadius: 230, maxValue: 10000,
                 outlineOnly: config.outlineOnly,
-                outerArc: config.outerArc || false 
+                outerArc: config.outerArc || false,
+                sunburst: config.sunburst
             });
         });
     });
