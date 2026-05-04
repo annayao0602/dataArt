@@ -113,7 +113,7 @@ const CircosChart = function CircosChart(selector, main_data, options) {
         laserGroup.append("path")
             .attr("d", pathString)
             .style("fill", "none")
-            .style("stroke", "#0000ff") // Red for laser
+            .style("stroke", "#0000ff") 
             .style("stroke-width", "1px");
 
         // Inner circle cutout
@@ -122,7 +122,7 @@ const CircosChart = function CircosChart(selector, main_data, options) {
             .attr("cy", 0)
             .attr("r", cfg.innerRadius)
             .style("fill", "none")
-            .style("stroke", "#0000ff") // Red for laser
+            .style("stroke", "#0000ff") 
             .style("stroke-width", "1px");
 
     } 
