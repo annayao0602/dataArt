@@ -202,7 +202,7 @@
         const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
         async function playTimeline() {
-            // 1. PRE-LOAD DATA: Fetch everything before starting the animation
+            // 1. PRE-LOAD DATA
             const timelineData = {};
             for (let year = startYear; year <= endYear; year++) {
                 try {
@@ -212,21 +212,14 @@
                 }
             }
 
-            // 2. RUN ANIMATION
-            while (true) { 
-                for (let year = startYear; year <= endYear; year++) {
-                    if (!timelineData[year]) continue; // Skip if file didn't load
-                    
-                    d3.select("#year-display").text(`${year}`);
-                    myChart.update(timelineData[year]);
-
-                    // Wait exactly the length of the transition so they chain perfectly
-                    await sleep(transitionSpeed); 
-                }
+            // 2. RUN ANIMATION EXACTLY ONCE
+            for (let year = startYear; year <= endYear; year++) {
+                if (!timelineData[year]) continue; 
                 
-                // Pause for 2 seconds at the end of the timeline before restarting
-                d3.select("#year-display").text("");
-                await sleep(2000); 
+                d3.select("#year-display").text(`${year}`);
+                myChart.update(timelineData[year]);
+
+                await sleep(transitionSpeed); 
             }
         }
 
