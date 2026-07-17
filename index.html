@@ -24,7 +24,9 @@
             overflow: hidden;
         }
         #year-display {
-            font-size: 1.5rem;
+            /* 5vmin means 5% of the smallest screen dimension. */
+            /* This guarantees it scales perfectly whether on a laptop or 4K video! */
+            font-size: 5vmin; 
             font-weight: bold;
             margin-bottom: 50px;
             color: #bbbbbb; 
